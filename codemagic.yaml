@@ -1,0 +1,21 @@
+workflows:
+  ios-expo-build:
+    name: Build iOS App with Expo
+    max_build_duration: 45
+    environment:
+      vars:
+        EXPO_APPLE_APP_SPECIFIC_PASSWORD: $EXPO_APPLE_APP_SPECIFIC_PASSWORD
+      node: 18
+    triggering:
+      events:
+        - push
+    scripts:
+      - name: Install dependencies
+        script: |
+          npm install -g expo-cli
+          npm install
+      - name: Build iOS app
+        script: |
+          expo build:ios --non-interactive
+    artifacts:
+      - build/*.ipa
