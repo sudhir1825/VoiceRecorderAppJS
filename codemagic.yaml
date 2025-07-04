@@ -1,21 +1,22 @@
 workflows:
-  ios-expo-build:
-    name: Build iOS App with Expo
-    max_build_duration: 45
+  react-native-workflow:
+    name: Build iOS with Expo
     environment:
       vars:
-        EXPO_APPLE_APP_SPECIFIC_PASSWORD: $EXPO_APPLE_APP_SPECIFIC_PASSWORD
+        EXPO_APPLE_TEAM_ID: <your_apple_team_id> # optional if using paid Apple account
       node: 18
-    triggering:
-      events:
-        - push
+      xcode: latest
     scripts:
       - name: Install dependencies
         script: |
           npm install -g expo-cli
-          npm install
+          npm ci
+      - name: Prebuild
+        script: |
+          npx expo install
+          npx expo prebuild
       - name: Build iOS app
         script: |
-          expo build:ios --non-interactive
+          npx expo run:ios --no-install --configuration Release
     artifacts:
-      - build/*.ipa
+      - ios/build/**/*.ipa
