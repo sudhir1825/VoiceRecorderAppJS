@@ -1,20 +1,21 @@
 workflows:
-  react-native-workflow:
-    name: Build iOS with Expo
+  expo-eas-ios:
+    name: EAS Build for iOS
     environment:
+      vars:
+        CI: true
       node: 18
       xcode: latest
     scripts:
-      - name: Install dependencies
+      - name: Install EAS CLI and dependencies
         script: |
-          npm install -g expo-cli
-          npm ci
-      - name: Prebuild
+          npm install -g eas-cli
+          npm install
+      - name: Configure EAS
         script: |
-          npx expo install
-          npx expo prebuild
-      - name: Build iOS app
+          eas build:configure --non-interactive || true
+      - name: Run EAS iOS Build
         script: |
-         npx expo build:ios --non-interactive
+          eas build --platform ios --non-interactive --profile preview
     artifacts:
-      - ios/build/**/*.ipa
+      - build/**/*.ipa
