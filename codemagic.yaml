@@ -2,8 +2,6 @@ workflows:
   react-native-workflow:
     name: Build iOS with Expo
     environment:
-      vars:
-        EXPO_APPLE_TEAM_ID: <your_apple_team_id> # optional if using paid Apple account
       node: 18
       xcode: latest
     scripts:
