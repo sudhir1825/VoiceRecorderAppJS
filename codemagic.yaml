@@ -9,13 +9,16 @@ workflows:
     scripts:
       - name: Install EAS CLI and dependencies
         script: |
+          export CI=true
           npm install -g eas-cli
           npm install
       - name: Configure EAS
         script: |
-          eas build:configure --non-interactive || true
+          export CI=true
+          eas build:configure || true
       - name: Run EAS iOS Build
         script: |
+          export CI=true
           eas build --platform ios --non-interactive --profile preview
     artifacts:
       - build/**/*.ipa
