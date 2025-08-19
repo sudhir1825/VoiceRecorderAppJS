@@ -2,7 +2,7 @@ import { Alert } from 'react-native';
 import * as FileSystem from 'expo-file-system';
 import * as SecureStore from 'expo-secure-store'; // Import SecureStore
 
-const API_BASE_URL = 'https://api-aiqa.xploro.io';
+const API_BASE_URL = '';
 
 export const uploadRecordingApi = async (recordingItem) => {
   console.log('uploadRecordingApi called with:', recordingItem);
